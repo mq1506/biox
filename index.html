@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Main</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+ 
+
+  <!-- Our Script (should be included in a separate file, only inline for demo purposes) -->
+  
+</head>
+
+<body>
+<div data-role="page" id="page">
+  <div data-role="header" data-theme="b">
+    <h1>BiOX</h1>
+    <a href="javascript:update.call()" data-icon="refresh" class="ui-btn-left">Update</a>
+    <a href="#options" data-prefetch data-icon="gear" class="ui-btn-right">Options</a>
+  </div>
+  <div data-role="content">
+  <h2>Temperature:</h2> <h2><span id="Ctemp"></span> ℃</h2> 
+  <h2>Humidity:</h2> <h2><span id="RH"></span> %</h2> 
+    
+  </div>
+</div>
+<div data-role="page" id="options">
+  <div data-role="header" data-theme="b">
+	<a href="index.html" data-icon="back">Back</a>
+	<h1>Options</h1>
+	<a href="javascript:save.call()" data-icon="check" data-theme="b">Save</a>
+</div>
+  <div data-role="content">
+    <div data-role="fieldcontain">
+      <label for="slider">Light Cycle Daylight Time (Hours) </label>
+      <input type="range" name="slider" id="slider" value= "0" min="0" max="24" />
+    </div>
+  </div>
+</div>
+<!-- Include jQuery -->
+  <script src="http://d23cj0cdvyoxg0.cloudfront.net/xivelyjs-1.0.4.min.js"></script>
+  <script>
+ update.call();
+    // Make sure the document is ready to be handled
+    var feedID        = 379559025; 
+	var Vslide = 4;
+	document.getElementById("slider").innerHTML=Vslide;
+	function update() {
+ 
+      // Set the Xively API key (https://xively.com/users/YOUR_USERNAME/keys)
+      xively.setKey( "HBoZuQTXAw1wJ6RBeXsTLXZztgHqoAI1DRdyEJGG8HQLaock" );
+     // Replace with your own values
+       xively.datastream.get (feedID, "slide", function ( datastream ) {
+        // Display the current value from the datastream
+	   $("#slider").val(datastream["current_value"] ).slider("refresh");
+      });
+      // Get datastream data from Xively
+      xively.datastream.get (feedID, "temp", function ( datastream ) {
+        // Display the current value from the datastream
+        $(Ctemp).html( datastream["current_value"] );
+      });
+	  
+	    xively.datastream.get (feedID, "H", function ( datastream ) {
+        // Display the current value from the datastream
+        $(RH).html( datastream["current_value"] );
+      });
+	  
+	}
+	
+	function save() {
+		   xively.setKey( "HBoZuQTXAw1wJ6RBeXsTLXZztgHqoAI1DRdyEJGG8HQLaock" );
+		 xively.datastream.update(feedID,"slide", {"current_value" : slider.value},function(data){
+	  })
+	}
+	
+	$(document).ready(function($) { 
+	update();
+	})
+	
+  </script>
+</body>
+</html>
