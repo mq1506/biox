@@ -214,4 +214,9 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
+<<<<<<< HEAD
+=======
+
+#Being safe for api keys!
+>>>>>>> 2cada70e90eb724fe647cf0de008a7a9892527c2
 key.js
