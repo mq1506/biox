@@ -7,12 +7,19 @@
 <name>BiOX</name>
 
 <description>
+<<<<<<< HEAD
 BiOX Automated Greenhous managment software
 </description>
 
 <author href="https://example.com" email="you@example.com">
 Marcus Quintilian
 </author>
+=======
+An application for sensor stuff.
+</description>
+
+<author href="https://example.com" email="you@example.com"> Marcus Quintillian </author>
+>>>>>>> 2cada70e90eb724fe647cf0de008a7a9892527c2
 <access origin="*" />
 <gap:platform name="ios" />
 <gap:platform name="android" />
